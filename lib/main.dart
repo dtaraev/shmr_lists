@@ -47,35 +47,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(_items[index]),
-            subtitle: index % 2 == 0 ? Text('subtitle') : null,
-            leading: Icon(Icons.radio_button_on),
-            onTap: () => showDialog(
-              context: context,
-              builder: (_) => AlertDialog(
-                title: Text('Do you really want to remove this item?'),
-                content: Text(_items[index]),
-                actions: [
-                  TextButton(
-                    child: Text('OK'),
-                    onPressed: () {
-                      _removeItem(_items[index]);
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: Text('Cancel'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  )
-                ],
-              ),
+      body: ListView.separated(
+        itemBuilder: (context, index) => ListTile(
+          title: Text(_items[index]),
+          subtitle: index % 2 == 0 ? Text('subtitle') : null,
+          leading: Icon(Icons.radio_button_on),
+          onTap: () => showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text('Do you really want to remove this item?'),
+              content: Text(_items[index]),
+              actions: [
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    _removeItem(_items[index]);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(),
+                )
+              ],
             ),
-          );
-        },
+          ),
+        ),
         itemCount: _items.length,
+        separatorBuilder: (context, index) => Divider(
+          indent: 8,
+          color: Colors.grey,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addItem('Item ${_items.length}'),

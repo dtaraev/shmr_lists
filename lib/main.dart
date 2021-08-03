@@ -41,9 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: <Widget>[
-          ListTile(
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
             title: Text('Item 1'),
             subtitle: Text('subtitle'),
             leading: Icon(Icons.radio_button_on),
@@ -59,29 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-          ),
-          ListTile(
-            title: Text('Item 2'),
-            subtitle: Text('subtitle'),
-          ),
-          ListTile(
-            title: Text('Item 3'),
-            subtitle: Text('subtitle'),
-            trailing: Icon(Icons.arrow_forward),
-          ),
-          ListTile(
-            title: Text('Item 4'),
-            leading: Icon(Icons.print),
-          ),
-          ListTile(
-            title: Text('Item 5'),
-            subtitle: Text('subtitle'),
-          ),
-          ListTile(
-            title: Text('Item 6'),
-            subtitle: Text('subtitle'),
-          ),
-        ],
+          );
+        },
+        itemCount: 5,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

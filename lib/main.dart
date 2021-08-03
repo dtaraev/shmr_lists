@@ -27,11 +27,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<String> _items = <String>[];
 
-  void _incrementCounter() {
+  void _addItem(String item) {
     setState(() {
-      _counter++;
+      _items.add(item);
+    });
+  }
+
+  void _removeItem(String item) {
+    setState(() {
+      _items.remove(item);
     });
   }
 
@@ -44,16 +50,24 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text('Item 1'),
-            subtitle: Text('subtitle'),
+            title: Text(_items[index]),
+            subtitle: index % 2 == 0 ? Text('subtitle') : null,
             leading: Icon(Icons.radio_button_on),
             onTap: () => showDialog(
               context: context,
               builder: (_) => AlertDialog(
-                title: Text('Title'),
+                title: Text('Do you really want to remove this item?'),
+                content: Text(_items[index]),
                 actions: [
                   TextButton(
                     child: Text('OK'),
+                    onPressed: () {
+                      _removeItem(_items[index]);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text('Cancel'),
                     onPressed: () => Navigator.of(context).pop(),
                   )
                 ],
@@ -61,10 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           );
         },
-        itemCount: 5,
+        itemCount: _items.length,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => _addItem('Item ${_items.length}'),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),

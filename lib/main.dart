@@ -41,19 +41,47 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            title: Text('Item 1'),
+            subtitle: Text('subtitle'),
+            leading: Icon(Icons.radio_button_on),
+            onTap: () => showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text('Title'),
+                actions: [
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          ),
+          ListTile(
+            title: Text('Item 2'),
+            subtitle: Text('subtitle'),
+          ),
+          ListTile(
+            title: Text('Item 3'),
+            subtitle: Text('subtitle'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+          ListTile(
+            title: Text('Item 4'),
+            leading: Icon(Icons.print),
+          ),
+          ListTile(
+            title: Text('Item 5'),
+            subtitle: Text('subtitle'),
+          ),
+          ListTile(
+            title: Text('Item 6'),
+            subtitle: Text('subtitle'),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

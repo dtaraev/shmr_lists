@@ -38,49 +38,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: GridView.extent(
-        padding: EdgeInsets.all(8),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        maxCrossAxisExtent: 100,
-        children: <Widget>[
-          Container(
-            child: Text('Item 1'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[50],
+      body: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
           ),
-          Container(
-            child: Text('Item 2'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[100],
-          ),
-          Container(
-            child: Text('Item 3'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[200],
-          ),
-          Container(
-            child: Text('Item 4'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[300],
-          ),
-          Container(
-            child: Text('Item 5'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[400],
-          ),
-          Container(
-            child: Text('Item 6'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[500],
-          ),
-          Container(
-            child: Text('Item 7'),
-            padding: EdgeInsets.all(8),
-            color: Colors.red[600],
-          ),
-        ],
-      ),
+          itemCount: 300,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              color: Colors.red,
+              child: Center(child: Text('$index')),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

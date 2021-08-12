@@ -25,33 +25,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> _items = <String>[];
-  ScrollController? _controller;
-  void _addItem(String item) {
+  int _counter = 0;
+  void _incrementCounter() {
     setState(() {
-      _items.add(item);
+      _counter++;
     });
-  }
-
-  void _removeItem(String item) {
-    setState(() {
-      _items.remove(item);
-    });
-  }
-
-  @override
-  void initState() {
-    _controller = ScrollController();
-    _controller?.addListener(() {
-      print('[listener] position: ${_controller?.position}');
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
   }
 
   @override
@@ -60,39 +38,88 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(
-        controller: _controller,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(_items[index]),
-            subtitle: index % 2 == 0 ? Text('subtitle') : null,
-            leading: Icon(Icons.radio_button_on),
-            onTap: () => showDialog(
-              context: context,
-              builder: (_) => AlertDialog(
-                title: Text('Do you really want to remove this item?'),
-                content: Text(_items[index]),
-                actions: [
-                  TextButton(
-                    child: Text('OK'),
-                    onPressed: () {
-                      _removeItem(_items[index]);
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: Text('Cancel'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  )
-                ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text('Item 1'),
+              subtitle: Text('subtitle'),
+              leading: Icon(Icons.radio_button_on),
+              onTap: () => showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text('Title'),
+                  actions: [
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    )
+                  ],
+                ),
               ),
             ),
-          );
-        },
-        itemCount: _items.length,
+            ListTile(
+              title: Text('Item 2'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 3'),
+              subtitle: Text('subtitle'),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: Text('Item 4'),
+              leading: Icon(Icons.print),
+            ),
+            ListTile(
+              title: Text('Item 5'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+            ListTile(
+              title: Text('Item 6'),
+              subtitle: Text('subtitle'),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _addItem('Item ${_items.length}'),
+        onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),

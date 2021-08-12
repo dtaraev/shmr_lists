@@ -38,11 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: GridView.count(
+      body: GridView.extent(
         padding: EdgeInsets.all(8),
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        crossAxisCount: 2,
+        maxCrossAxisExtent: 100,
         children: <Widget>[
           Container(
             child: Text('Item 1'),

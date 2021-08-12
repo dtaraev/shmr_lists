@@ -38,85 +38,48 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text('Item 1'),
-              subtitle: Text('subtitle'),
-              leading: Icon(Icons.radio_button_on),
-              onTap: () => showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: Text('Title'),
-                  actions: [
-                    TextButton(
-                      child: Text('OK'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 3'),
-              subtitle: Text('subtitle'),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-            ListTile(
-              title: Text('Item 4'),
-              leading: Icon(Icons.print),
-            ),
-            ListTile(
-              title: Text('Item 5'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-            ListTile(
-              title: Text('Item 6'),
-              subtitle: Text('subtitle'),
-            ),
-          ],
-        ),
+      body: GridView.count(
+        padding: EdgeInsets.all(8),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        crossAxisCount: 2,
+        children: <Widget>[
+          Container(
+            child: Text('Item 1'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[50],
+          ),
+          Container(
+            child: Text('Item 2'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[100],
+          ),
+          Container(
+            child: Text('Item 3'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[200],
+          ),
+          Container(
+            child: Text('Item 4'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[300],
+          ),
+          Container(
+            child: Text('Item 5'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[400],
+          ),
+          Container(
+            child: Text('Item 6'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[500],
+          ),
+          Container(
+            child: Text('Item 7'),
+            padding: EdgeInsets.all(8),
+            color: Colors.red[600],
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

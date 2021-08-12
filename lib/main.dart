@@ -26,6 +26,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> _items = <String>[];
+  ScrollController? _controller;
   void _addItem(String item) {
     setState(() {
       _items.add(item);
@@ -39,46 +40,56 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    _controller = ScrollController();
+    _controller?.addListener(() {
+      print('[listener] position: ${_controller?.position}');
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: NotificationListener<ScrollNotification>(
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(_items[index]),
-              subtitle: index % 2 == 0 ? Text('subtitle') : null,
-              leading: Icon(Icons.radio_button_on),
-              onTap: () => showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: Text('Do you really want to remove this item?'),
-                  content: Text(_items[index]),
-                  actions: [
-                    TextButton(
-                      child: Text('OK'),
-                      onPressed: () {
-                        _removeItem(_items[index]);
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('Cancel'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    )
-                  ],
-                ),
+      body: ListView.builder(
+        controller: _controller,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(_items[index]),
+            subtitle: index % 2 == 0 ? Text('subtitle') : null,
+            leading: Icon(Icons.radio_button_on),
+            onTap: () => showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text('Do you really want to remove this item?'),
+                content: Text(_items[index]),
+                actions: [
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      _removeItem(_items[index]);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text('Cancel'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
               ),
-            );
-          },
-          itemCount: _items.length,
-        ),
-        onNotification: (scrollNotification) {
-          print('[scrollNotification] ${scrollNotification.metrics.pixels}');
-          return true;
+            ),
+          );
         },
+        itemCount: _items.length,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addItem('Item ${_items.length}'),
